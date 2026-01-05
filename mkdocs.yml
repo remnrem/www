@@ -1,0 +1,23 @@
+site_name: Lunascope Docs
+
+theme:
+  name: material
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+nav:
+  - Home: index.md
+  - Installation: install.md
+  - Overview: overview.md
+  - Loading Data: loading.md
+  - Viewer: signal-viewer.md
+  - Signals: signals.md
+  - Annotations: annotations.md
+  - Spectrograms: spectrograms.md
+  - Hypnograms: hypnograms.md
+  - Masks: masks.md
+  - Luna Scripts: scripts.md
+  - Parameters: parameters.md
+  - Configuration: config.md
+  - Updates/known issues: updates.md
