@@ -1,0 +1,31 @@
+
+# from CCSHS
+
+EPOCH dur=1
+FILTER sig=C3 bandpass=0.3,35 tw=0.1,5 ripple=0.01,0.01
+MASK hms=04:36:36-04:37:02
+RE
+MATRIX file=f.1 sig=C3
+
+R
+d <- read.delim('f.1' ) 
+
+png(
+  "line.png",
+  width = 3000,
+  height = 200,
+  res = 300,
+  bg = "transparent"
+)
+
+par(
+  bg = NA,
+  mar = c(0, 0, 0, 0),
+  lwd = 0.6,        # fine line
+  lend = "round",   # cleaner joins
+  ljoin = "round" 
+)
+
+plot( d$C3 ,  type="l" , lwd=0.5 , xaxt='n' , yaxt='n' , main="" , xlab="" , ylab="" , bty = "n" )
+
+dev.off()

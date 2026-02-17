@@ -1,0 +1,474 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quantitative Sleep Science</title>
+  <style>
+    :root{
+      --bg: #f4f5f3;        /* dirty white / warm paper */
+      --panel: #ffffff;    /* cards */
+      --text: #1a1f26;     /* off-black */
+      --muted: rgba(26,31,38,.68);
+      --hair: rgba(26,31,38,.12);
+      --shadow: 0 12px 30px rgba(0,0,0,.08);
+
+      --outer: 1200px;     /* SINGLE page width (fixes overhang) */
+      --narrow: 980px;     /* text column width */
+      --radius: 14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      -webkit-font-smoothing: antialiased;
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit;
+    text-decoration: underline;
+    text-decoration-color: #afafaf; /* light gray underline */
+    text-underline-offset: 0.15em;
+    }
+
+    a:hover{ text-decoration:underline; text-underline-offset: 4px; }
+
+    a:focus-visible{
+      outline: 2px solid rgba(26,31,38,.25);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* ONE outer wrapper; inner narrow wrapper for text */
+    .wrap{
+      max-width: var(--outer);
+      margin: 0 auto;
+      /*padding: 46px 22px 90px; */
+      padding: 6px 22px 90px;
+    }
+    .narrow{
+      max-width: var(--narrow);
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header{
+      padding: 8px 0 18px;
+      border-bottom: 1px solid var(--hair);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 18px;
+      flex-wrap:wrap;
+    }
+ 
+    .brand-line{
+    display: flex;
+    align-items: baseline;     /* aligns text, not boxes */
+    flex-direction:column;
+    gap: 14px;
+    flex-wrap: wrap;           /* allows wrap on small screens */
+    }
+    
+    .brand-line h1{
+    margin: 0;
+    font-size: clamp(28px, 4vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 200;
+    }
+    
+    .brand-line .subtitle{
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.4;
+    color: rgba(26,31,38,.65);
+    max-width: 64ch;
+    }
+    
+    
+
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 14px;
+      margin-top: 6px;
+    }
+
+    nav a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav a:hover{
+      border-color: var(--hair);
+      color: var(--text);
+      background: rgba(0,0,0,.02);
+      text-decoration:none;
+    }
+    
+
+
+    /* MOTIF: fixed height everywhere; never shrinks; crops horizontally if needed */
+.motif{
+  margin: 12px 0 0;
+  padding: 8px 0;
+}
+
+/* One rule. All viewports. No jumping. */
+.motif img{
+  display: block;
+  width: 100%;
+  height: 56px;          /* SAME height on desktop, tablet, phone */
+  min-height: 56px;      /* never collapse */
+  object-fit: cover;     /* crop instead of shrink */
+  object-position: center; /* keep EEG centered */
+  margin: 0 auto;
+  opacity: 0.92;
+}
+
+    
+    /* Intro */
+
+    .right-rail{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    }
+
+    @media (max-width: 900px){
+    .intro{
+    grid-template-columns: 1fr;
+    }
+    .right-rail{
+    grid-template-columns: 1fr;
+    }
+    }
+    
+    .intro{
+    padding-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 14px;
+    align-items: stretch;
+    }
+
+    .statement{
+    grid-column: 1 / span 4;   /* aligns with Sleep + Genetics */
+    }
+        
+    .panel-announcements{
+    grid-column: 5 / span 4;   /* EXACTLY aligns with Resources */
+    }
+    
+    .panel-contact{
+    grid-column: 9 / span 4;   /* narrow middle column */
+    }
+
+    .intro br {
+    display: block;
+    margin-top: 0.8em;
+    }
+    
+@media (max-width: 860px){
+  .intro{
+    grid-template-columns: 1fr;
+  }
+  .statement,
+  .panel-contact,
+  .panel-announcements{
+    grid-column: auto;
+  }
+}
+
+
+    .statement{
+      margin:0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    .panel{
+    text-align: left;          /* change from right */
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: var(--radius);
+    padding: 16px 16px 14px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    height: 100%;
+    max-width: none;           /* prevents accidental card narrowing */
+}
+    
+    .panel-contact{
+    text-align: right;
+    font-size: 13.5px;
+    line-height: 1.45;
+    }
+    
+    .panel-contact strong{
+    font-size: 14px;
+    font-weight: 500;
+    }
+
+    
+    .panel-announcements{
+    text-align: left;
+    }
+    
+    .panel-announcements ul{
+    list-style-position: disc;
+    padding-left: 1em;    
+    }
+
+    
+    .panel a {
+    display: inline-block;
+    }
+
+    .panel .kicker{
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 10px;
+    }
+
+    .panel p{
+      margin:0;
+      font-size: 14.5px;
+    }
+
+    .chips{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--hair);
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chip{
+      border: 1px solid var(--hair);
+      background: rgba(0,0,0,.02);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    /* Sections */
+    section{
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--hair);
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 12.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .card{
+      grid-column: span 3;
+      background: var(--panel);
+      border: 1px solid var(--hair);
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 860px){
+      .card{ grid-column: span 12; }
+    }
+
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+
+    .card p{
+      margin:0;
+      font-size: 14.5px;
+      color: var(--muted);
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+
+    .item{
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+      padding: 14px 14px 12px;
+      border: 1px solid var(--hair);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .item .name{
+      min-width: 92px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .item .desc{
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .list{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+    .list li{ margin: 6px 0; }
+
+    footer{
+      margin-top: 44px;
+      padding-top: 18px;
+      border-top: 1px solid var(--hair);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      justify-content:space-between;
+      gap: 16px;
+      flex-wrap:wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="motif" aria-hidden="true">
+      <img src="img/logo.png" alt="">
+    </div>
+
+    <!-- Header is NARROW (text width) -->
+    <div class="narrow">
+      
+      <header>
+	<div class="brand-line">
+	  <h1>Quantitative approaches to sleep, genetics, and brain health &nbsp; | &nbsp; <b>Purcell Lab</b></h1>
+	</div>
+      </header>
+      
+      <div class="intro">
+        <p class="statement">
+	  
+          We apply quantitative approaches to human sleep and genetics as complementary windows onto brain function, health, and psychiatric illness.<br>
+
+	  Our work is based at the <a href="https://nyspi.org">New York State
+	  Psychiatric Institute</a> and
+	  the <a href="https://www.columbiapsychiatry.org/">Department
+	  of Psychiatry</a>
+	  at <a href="https://www.cuimc.columbia.edu/">Columbia
+	  University Irving Medical Center</a>.
+	  
+        </p>
+	
+	<aside class="panel panel-announcements">
+          <div class="kicker">Announcements</div>
+          <p style="margin:0; color:var(--muted);">
+	    <ul>
+	      <li>Jan-2026: A beta version of <a href="https://zzz.nyspi.org/lunascope">Lunascope</a> is now available
+		<li>Dec-2025: We've moved! BWH/Harvard to Columbia University
+		<li>Sep-2025: Luna walkthrough data are <a href="https://sleepdata.org/datasets/luna-grins">available in the NSRR</a>
+	    </ul>
+          </p>
+	</aside>
+	
+	<aside class="panel panel-contact">
+          <div class="kicker">Contact</div>
+          <p style="margin:0; color:var(--muted);">
+            Professor Shaun M. Purcell<br>
+            Kolb Annex, Rm 263<br>
+            Dept. of Psychiatry&nbsp;·&nbsp; CUIMC &nbsp;·&nbsp; NYSPI<br>
+	    
+            <a href="mailto:shaun.purcell@nyspi.columbia.edu">shaun.purcell@nyspi.columbia.edu</a>
+          </p>
+	</aside>
+      </div>
+      
+      <section id="lenses">
+	<h2>Selected works</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Sleep</h3>
+            <p>
+              - <a href="https://academic.oup.com/sleep/article/48/2/zsae218/7761931?login=false">sleep neurophysiology and psychiatric disease</a><br>
+	      - <a href="https://rdcu.be/caRiA">sleep and cognition</a><br>
+	      - <a href="https://academic.oup.com/sleep/advance-article-abstract/doi/10.1093/sleep/zsaf157/8158645">sleep across the lifespan</a><br>
+	      - <a href="http://zzz.nyspi.org/library/purcell-2017-spindles.pdf">quantitative EEG methods</a>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Genetics</h3>
+            <p>
+	      - <a href="https://zzz.nyspi.org/library/Purcell-2014-Sweden-Exomes.pdf">polygenic models of disease</a><br>
+	      - <a herf="https://zzz.nyspi.org/library/isc-2008.pdf">copy number variation</a><br>
+	      - <a href="https://zzz.nyspi.org/library/statistical-power-NRG-2014-Sham-Purcell.pdf">quantitative genetics</a><br>
+	      - <a href="https://zzz.nyspi.org/library/pgc-2012-bipolar.pdf">psychiatric disease</a><br>
+            </p>
+          </div>
+          <div class="card">
+            <h3>Code & data</h3>
+            <p>	       
+	       - <a href="https://zzz.nyspi.org/luna">Luna, for sleep signals</a><br>
+	       - <a href="https://sleepdata.org">open sleep data (NSRR)</a><br>
+	       - <a href="https://zzz.nyspi.org/plink">PLINK for GWAS data</a><br>
+	       - <a href="tools">other tools</a><br> 	      
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Learn more</h3>
+            <p>
+	      See <a href="overview">here</a> for a more complete list of projects, publications and people.
+            </p>
+          </div>
+
+	</div>
+      </section>
+
+
+      <footer>
+	<div></div>
+        <div>© <span id="y"></span> Purcell lab</div>
+      </footer>
+
+    </div><!-- /narrow -->
+  </div><!-- /wrap -->
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+/* docs/stylesheets/extra.css */
+/* Quiet, “paper” background + muted text, matching your landing page */
+
+
+.img-text {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;   /* bias toward text */
+  gap: 0.75rem;                        /* tighter horizontal spacing */
+  align-items: center;                /* vertically align image + text */
+  margin-top: 0.5rem;
+}
+
+.img-text img {
+  width: 100%;
+  height: auto;
+}
+
+.text-col p {
+  margin: 0 0 0.6rem 0;               /* tighter paragraph spacing */
+  line-height: 1.45;
+}
+
+.text-col strong {
+  font-size: 1.05em;
+}
+
+@media (max-width: 900px) {
+  .img-text {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+
+
+:root{
+  --bg: #f4f5f3;
+  --panel: #ffffff;
+  --text: #1a1f26;
+  --muted: rgba(26,31,38,.68);
+  --hair: rgba(26,31,38,.12);
+}
+
+/* Material base */
+[data-md-color-scheme="default"]{
+  --md-default-bg-color: var(--bg);
+  --md-default-fg-color: var(--text);
+  --md-default-fg-color--light: var(--muted);
+  --md-typeset-color: var(--text);
+  --md-typeset-a-color: var(--text);
+  --md-accent-fg-color: #2b6cb0; /* restrained link accent */
+}
+
+/* System font stack */
+:root{
+  --md-text-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --md-code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Header + nav: keep minimal */
+.md-header{
+  background: var(--bg) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--hair);
+}
+.md-tabs{
+  background: var(--bg) !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--hair);
+}
+
+/* Make content feel “print-like” */
+.md-main__inner{
+  padding-top: 1.2rem;
+}
+.md-content{
+  max-width: 980px; /* matches your narrow column */
+}
+.md-typeset h1{
+  letter-spacing: -0.02em;
+}
+
+
+/* Body links: same text color, but unmistakably a link */
+.md-typeset a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-color: rgba(0, 0, 0, 0.35);
+}
+
+/* Dark mode underline color */
+[data-md-color-scheme="slate"] .md-typeset a {
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Hover/focus: solid underline (still subtle) */
+.md-typeset a:hover,
+.md-typeset a:focus {
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+}
+
+/* Visited links: barely perceptible change */
+.md-typeset a:visited {
+    opacity: 0.85;
+}
+
+/* Cards / callouts */
+.md-typeset .admonition,
+.md-typeset details{
+  border: 1px solid var(--hair);
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+.md-typeset .admonition-title{
+  background: transparent;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: .72rem;
+}
+
+/* Reduce visual noise in sidebars */
+.md-sidebar__scrollwrap{
+  border-right: 1px solid var(--hair);
+}
+.md-nav__title{
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: .72rem;
+}

@@ -1,23 +1,51 @@
-site_name: Lunascope Docs
-
-theme:
+# mkdocs.yml
+site_name: Purcell lab
+site_url: https://zzz.nyspi.org/
+theme:  
   name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+    - search.share
+  palette:
+    - scheme: default
+      primary: white
+      accent: blue
+  font: false   # use system fonts via CSS for a quieter, print-like feel
+#  logo: assets/logo.svg   # optional (can omit)
+  favicon: assets/favicon.png
 
-markdown_extensions:
-  - attr_list
-  - md_in_html
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+
 nav:
-  - Home: index.md
-  - Installation: install.md
-  - Overview: overview.md
-  - Loading Data: loading.md
-  - Viewer: signal-viewer.md
-  - Signals: signals.md
-  - Annotations: annotations.md
-  - Spectrograms: spectrograms.md
-  - Hypnograms: hypnograms.md
-  - Masks: masks.md
-  - Luna Scripts: scripts.md
-  - Parameters: parameters.md
-  - Configuration: config.md
-  - Updates/known issues: updates.md
+  - Home: overview.md
+
+  - Research areas:
+      - Sleep: sleep.md
+      - Genetics: genetics.md
+
+  - People:
+      - Biography: bio.md
+      - Lab members: people.md
+
+  - Resources:
+      - Luna: https://zzz.nyspi.org/luna/
+      - PLINK: https://zzz.nyspi.org/plink/
+      - NSRR: nsrr.md
+
+  - Selected works:
+      - Publications: pubs.md
+      - Tools: code.md
+      
+  - Contact: index.html
+
